@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # install custom apps
     'Core',
+    'authentication',
 ]
 
 MIDDLEWARE = [
