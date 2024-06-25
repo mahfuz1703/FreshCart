@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from Core.views import home
+from django.contrib import messages
 
 # Create your views here.
 def singin(request):
     if request.user.is_authenticated:
+        messages.warning(request, "You are already logged in!!")
         return redirect(home)
     
     if  request.method == "POST":
@@ -19,6 +21,7 @@ def singin(request):
             if request.user.is_superuser:
                 return redirect(reverse('admin:index'))
             else:
+                messages.success(request, "You are successfully logged in!!")
                 return redirect(home)
         else:
             error_message = "User not found!! Provide valid credintials."
@@ -29,6 +32,7 @@ def singin(request):
 
 def singup(request):
     if request.user.is_authenticated:
+        messages.warning(request, "You are already user!!")
         return redirect(home)
 
     if  request.method == "POST":
@@ -52,6 +56,7 @@ def singup(request):
         else:
             user = User.objects.create_user(username=username, email=email, password=pass1)
             user.save()
+            messages.success(request, "Your account successfully created!!")
             return redirect(singin)
     
     return render(request, "authentication/signup.html")
@@ -59,4 +64,5 @@ def singup(request):
 
 def signout(request):
     logout(request)
+    messages.warning(request, "Your are now logged out!!")
     return redirect(singin)
