@@ -252,21 +252,16 @@
                                 All Departments
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Dairy, Bread & Eggs</a></li>
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Snacks & Munchies</a></li>
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Fruits & Vegetables</a></li>
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Cold Drinks & Juices</a></li>
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Breakfast & Instant Food</a>
-                                </li>
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Bakery & Biscuits</a></li>
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">Chicken, Meat & Fish</a></li>
+                                {% for category in categories %}
+                                <li><a class="dropdown-item" href="./pages/shop-grid.html">{{category.title}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div>
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item dropdown w-100 w-lg-auto">
-                                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">Home</a>
+                                    <a class="nav-link dropdown-toggle" href="{% url 'all_products' %}" role="button"
+                                        aria-expanded="false">Products</a>
                                 </li>
                                 <li class="nav-item dropdown w-100 w-lg-auto">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

@@ -1,0 +1,331 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<main>
+    <!-- section-->
+    <div class="mt-4">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- col -->
+                <div class="col-12">
+                    <!-- breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item"><a href="#!">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Shop</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Snacks & Munchies</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- section -->
+    <section class="mt-8 mb-lg-14 mb-8">
+        <div class="container">
+            <!-- row -->
+            <div class="row gx-10">
+                <div class="col-12">
+                    <!-- filter btn -->
+                    <a class="btn btn-outline-gray-400 text-muted" data-bs-toggle="collapse" href="#collapseFilter"
+                        role="button" aria-expanded="true" aria-controls="collapseFilter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-filter me-2">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                        </svg>
+                        Filters
+                    </a>
+
+                    <!-- collapse -->
+                    <div class="collapse mt-6 show" id="collapseFilter">
+                        <div class="row row-cols-lg-4 row-cols-1 row-cols-md-2">
+                            <!-- col -->
+
+                            <!-- category -->
+                            <div class="col">
+                                <!-- card -->
+                                <div class="card mb-4 mb-lg-0">
+                                    <div class="card-body p-6">
+                                        <!-- content -->
+                                        <h5 class="mb-3">Categories</h5>
+                                        <!-- nav -->
+                                        <ul class="nav nav-category">
+                                            <!-- nav item -->
+
+                                            {% for category in categories %}
+                                            <li class="nav-item border-bottom w-100"><a href="#" class="nav-link">{{category.title}}</a></li>
+                                            {% endfor %}
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- col -->
+                            </div>
+
+                            <!-- Vendors -->
+                            <div class="col">
+                                <!-- card -->
+                                <div class="card mb-4 mb-lg-0">
+                                    <div class="card-body p-6">
+                                        <!-- content -->
+                                        <div>
+                                            <h5 class="mb-3">Stores</h5>
+                                            <div class="my-4">
+                                                <!-- input -->
+                                                <input type="search" class="form-control"
+                                                    placeholder="Search by store" />
+                                            </div>
+
+                                            {% for vendor in vendors %}
+                                            <div class="form-check mb-2">
+                                                <!-- input -->
+                                                <input class="form-check-input" type="checkbox" value="" id="eGrocery"
+                                                 />
+                                                <label class="form-check-label" for="eGrocery">{{vendor.title}}</label>
+                                            </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- col -->
+                            </div>
+
+                            <div class="col">
+                                <!-- card -->
+                                <div class="card mb-4 mb-lg-0">
+                                    <div class="card-body p-6">
+                                        <!-- content -->
+                                        <div>
+                                            <h5 class="mb-3">Price</h5>
+                                            <div>
+                                                <div id="priceRange" class="mb-3"></div>
+                                                <small class="text-muted">Price:</small>
+                                                <span id="priceRange-value" class="small"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- col -->
+                            </div>
+
+                            <div class="col">
+                                <!-- card -->
+                                <div class="card mb-4 mb-lg-0">
+                                    <div class="card-body p-6">
+                                        <!-- content -->
+                                        <div>
+                                            <h5 class="mb-3">Rating</h5>
+                                            <div>
+                                                <div class="form-check mb-2">
+                                                    <!-- input -->
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="ratingFive" />
+                                                    <!-- rating -->
+                                                    <label class="form-check-label" for="ratingFive">
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <!-- input -->
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="ratingFour" checked />
+                                                    <!-- rating -->
+                                                    <label class="form-check-label" for="ratingFour">
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <!-- input -->
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="ratingThree" />
+                                                    <!-- rating -->
+                                                    <label class="form-check-label" for="ratingThree">
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <!-- input -->
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="ratingTwo" />
+                                                    <!-- rating -->
+                                                    <label class="form-check-label" for="ratingTwo">
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <!-- input -->
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="ratingOne" />
+                                                    <!-- rating -->
+                                                    <label class="form-check-label" for="ratingOne">
+                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                        <i class="bi bi-star text-warning"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-10">
+                    <!-- content -->
+                    <div class="d-md-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="mb-3 mb-md-0">
+                                <span class="text-dark">{{product_count}}</span>
+                                Products found
+                            </p>
+                        </div>
+                        <!-- list -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="shop-list.html" class="text-muted me-3"><i class="bi bi-list-ul"></i></a>
+                            <a href="shop-grid.html" class="me-3 active"><i class="bi bi-grid"></i></a>
+                            <a href="shop-grid-3-column.html" class="me-3 text-muted"><i
+                                    class="bi bi-grid-3x3-gap"></i></a>
+                            <div class="me-2">
+                                <!-- select -->
+                                <select class="form-select">
+                                    <option selected>Show: 50</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                </select>
+                            </div>
+                            <!-- select -->
+                            <div>
+                                <select class="form-select">
+                                    <option selected>Sort by: Featured</option>
+                                    <option value="Low to High">Price: Low to High</option>
+                                    <option value="High to Low">Price: High to Low</option>
+                                    <option value="Release Date">Release Date</option>
+                                    <option value="Avg. Rating">Avg. Rating</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- row -->
+
+                     
+                     <!-- Products -->
+                    <div class="row g-4 row-cols-xl-5 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">
+                        {% for p in products%}
+                    <div class="col">
+                        <div class="card card-product">
+                            <div class="card-body">
+                                <div class="text-center position-relative">
+                                    <div class="position-absolute top-0 start-0">
+                                        <span class="badge bg-danger">-{{p.get_percentage | floatformat:0}}%</span>
+                                    </div>
+                                    <a href="#!"><img src="{{p.image.url}}"
+                                            alt="{{p.title}}" class="mb-3 img-fluid" /></a>
+
+                                    <div class="card-product-action">
+                                        <a href="#!" class="btn-action" data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal">
+                                            <i class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true"
+                                                title="Quick View"></i>
+                                        </a>
+                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
+                                            title="Wishlist"><i class="bi bi-heart"></i></a>
+                                        <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
+                                            title="Compare"><i class="bi bi-arrow-left-right"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-small mb-1">
+                                    <a href="#!" class="text-decoration-none text-muted"><small>{{p.category.title}}</small></a>
+                                </div>
+                                <h2 class="fs-6"><a href="./pages/shop-single.html"
+                                        class="text-inherit text-decoration-none">{{p.title}}</a></h2>
+                                <small>By <strong>{{p.vendor}}</strong></small>
+                                <div>
+                                    <small class="text-warning">
+                                        stars
+                                    </small>
+                                    <span class="text-muted small">4.5(149)</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div>
+                                        <span class="text-dark">${{p.price}}</span>
+                                        <span class="text-decoration-line-through text-muted">${{p.old_price}}</span>
+                                    </div>
+                                    <div>
+                                        <a href="#!" class="btn btn-primary btn-sm">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-plus">
+                                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            </svg>
+                                            Add
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+
+                    <div class="row mt-8">
+                        <div class="col">
+                            <!-- nav pagination -->
+                            <nav>
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a class="page-link mx-1" href="#" aria-label="Previous">
+                                            <i class="feather-icon icon-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link mx-1 active" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link mx-1" href="#">2</a></li>
+
+                                    <li class="page-item"><a class="page-link mx-1" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link mx-1" href="#">12</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link mx-1" href="#" aria-label="Next">
+                                            <i class="feather-icon icon-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock content %}
