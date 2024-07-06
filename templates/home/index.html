@@ -60,7 +60,7 @@
 
                     {% for category in categories %}
                     <div class="item">
-                        <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+                        <a href="{% url 'product_category_wise' category.category_id %}" class="text-decoration-none text-inherit">
                             <div class="card card-product mb-lg-4">
                                 <div class="card-body text-center py-8">
                                     <img src="{{category.image.url}}"
@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
                                 <div class="text-small mb-1">
-                                    <a href="#!" class="text-decoration-none text-muted"><small>{{p.category.title}}</small></a>
+                                    <a href="{% url 'product_category_wise' p.category.category_id %}" class="text-decoration-none text-muted"><small>{{p.category.title}}</small></a>
                                 </div>
                                 <h2 class="fs-6"><a href="./pages/shop-single.html"
                                         class="text-inherit text-decoration-none">{{p.title}}</a></h2>

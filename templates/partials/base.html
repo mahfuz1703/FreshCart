@@ -19,7 +19,7 @@
 
     <!-- Libs CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
     <link href="{% static 'libs/bootstrap-icons.min.css' %}" rel="stylesheet" />
     <link href="{% static 'libs/feather-icons.css' %}" rel="stylesheet" />
     <link href="{% static 'libs/simplebar.min.css' %}" rel="stylesheet" />
@@ -217,22 +217,11 @@
                             </a>
                             <div class="collapse mt-2" id="collapseExample">
                                 <div class="card card-body">
+                                    {% for category in categories %}
                                     <ul class="mb-0 list-unstyled">
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Dairy, Bread &
-                                                Eggs</a></li>
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Snacks & Munchies</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Fruits &
-                                                Vegetables</a></li>
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Cold Drinks &
-                                                Juices</a></li>
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Breakfast & Instant
-                                                Food</a></li>
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Bakery & Biscuits</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="./pages/shop-grid.html">Chicken, Meat &
-                                                Fish</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'product_category_wise' category.category_id %}">{{category.title}}</a></li>
                                     </ul>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -253,7 +242,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 {% for category in categories %}
-                                <li><a class="dropdown-item" href="./pages/shop-grid.html">{{category.title}}</a></li>
+                                <li><a class="dropdown-item" href="{% url 'product_category_wise' category.category_id %}">{{category.title}}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -898,30 +887,18 @@
                         <div class="col-6">
                             <!-- list -->
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Vegetables & Fruits</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link"> Breakfast & instant food</a>
-                                </li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link"> Bakery & Biscuits</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Atta, rice & dal</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Sauces & spreads</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Organic & gourmet</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link"> Baby care</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Cleaning essentials</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Personal care</a></li>
+                                {% for c in categories %}
+                                <li class="nav-item mb-2"><a href="{% url 'product_category_wise' c.category_id %}" class="nav-link">{{c.title}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
+                        
                         <div class="col-6">
                             <!-- list -->
                             <ul class="nav flex-column">
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Dairy, bread & eggs</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link"> Cold drinks & juices</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link"> Tea, coffee & drinks</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Masala, oil & more</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Chicken, meat & fish</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Paan corner</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link"> Pharma & wellness</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Home & office</a></li>
-                                <li class="nav-item mb-2"><a href="#!" class="nav-link">Pet care</a></li>
+                                {% for c in categories %}
+                                <li class="nav-item mb-2"><a href="{% url 'product_category_wise' c.category_id %}" class="nav-link">{{c.title}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -1057,8 +1034,8 @@
 
 
     <!-- Libs JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+    <script src="{% static 'libs/jquery.min.js' %}"></script>
     <script src="{% static 'libs/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'libs/simplebar.min.js' %}"></script>
 
