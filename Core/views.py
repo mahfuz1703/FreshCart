@@ -39,3 +39,19 @@ def product_category_wise(request, category_id):
     }
     return render(request, "home/product_category_wise.html", context)
 
+def all_vendors(request):
+    vendors = Vendor.objects.all()
+    context = {
+        'vendors': vendors,
+    }
+    return render(request, "home/all_vendors.html", context)
+
+def vendor_details(request, vendor_id):
+    vendor = Vendor.objects.get(vendor_id=vendor_id)
+    products = Product.objects.filter(product_status="published", vendor=vendor)
+
+    context = {
+        'vendor': vendor,
+        'products': products,
+    }
+    return render(request, "home/vendor_details.html", context)

@@ -1,0 +1,86 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <!-- section -->
+    <section class="mt-8">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- heading -->
+                    <div class="bg-light d-flex justify-content-between ps-md-10 ps-6 rounded">
+                        <div class="d-flex align-items-center">
+                            <h1 class="mb-0 fw-bold">Stores</h1>
+                        </div>
+                        <div class="py-6">
+                            <!-- img -->
+                            <!-- img -->
+                            <img src="{% static 'images/svg-graphics/store-graphics.svg' %}" alt="" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mt-6 mb-lg-14 mb-8">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-4">
+                        <!-- title -->
+                        <h6>
+                            We have
+                            <span class="text-primary">{{vendors.count}}</span>
+                            vendors now
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 g-lg-4">
+                <!-- col -->
+
+                {% for v in vendors %}
+                <div class="col">
+                    <!-- card -->
+                    <div class="card flex-row p-8 card-product">
+                        <div>
+                            <!-- img -->
+                            <img src="{{ v.image.url }}" alt="{{v.title}}"
+                                class="rounded-circle icon-shape icon-xl" />
+                        </div>
+                        <!-- content -->
+                        <div class="ms-6">
+                            <h5 class="mb-1"><a href="{% url 'vendor_details' v.vendor_id %}" class="text-inherit">{{v.title}}</a></h5>
+                            <div class="small text-muted">
+                                <strong>{{v.vendor.count}} products</strong>
+                            </div>
+                            <div class="py-3">
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>Address: {{v.address}}</li>
+                                    <li>Contact: {{v.contact}}</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <!-- badge -->
+                                <div class="badge text-bg-light border">
+                                    <a href="{% url 'vendor_details' v.vendor_id %}">Visit Store</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock content %}
