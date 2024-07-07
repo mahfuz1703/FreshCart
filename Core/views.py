@@ -24,11 +24,10 @@ def all_products(request):
 
 def all_categories(request):
     categories = Category.objects.all()
-    print(categories)
     context = {
         'categories': categories,
     }
-    return render(request, "partials/base.html", context)
+    return render(request, "home/all_category.html", context)
 
 def product_category_wise(request, category_id):
     category = Category.objects.get(category_id=category_id)
