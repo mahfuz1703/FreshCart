@@ -90,6 +90,9 @@ class Product(models.Model):
     old_price = models.DecimalField(max_digits=99999999, decimal_places=2, default=2.99)
 
     specification = models.TextField(blank=True, null=True)
+    disclaimer = models.TextField(blank=True, null=True)
+    p_type = models.CharField(max_length=150, default="Organic")
+    shipping = models.IntegerField(default=1)
     # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
     product_status = models.CharField(choices=STATUS, max_length=20, default="In Review")
     
@@ -119,7 +122,7 @@ class Product(models.Model):
 
 class ProductImages(models.Model):
     image = models.ImageField(upload_to="product_image", default="product.png")
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="p_images")
     date = models.DateField(auto_now_add=True)
 
     class Meta:

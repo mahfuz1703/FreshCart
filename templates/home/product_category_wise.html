@@ -76,7 +76,7 @@
                                         <div class="position-absolute top-0 start-0">
                                             <span class="badge bg-danger">-{{p.get_percentage | floatformat:0}}%</span>
                                         </div>
-                                        <a href="shop-single.html">
+                                        <a href="{% url 'product_details' p.product_id %}">
                                             <!-- img -->
                                             <img src="{{p.image.url}}"
                                                 alt="{{p.title}}" class="mb-3 img-fluid" />
@@ -96,9 +96,9 @@
                                     </div>
                                     <!-- heading -->
                                     <div class="text-small mb-1">
-                                        <a href="#!" class="text-decoration-none text-muted"><small>{{p.category}}</small></a>
+                                        <a href="{% url 'product_category_wise' p.category.category_id %}" class="text-decoration-none text-muted"><small>{{p.category}}</small></a>
                                     </div>
-                                    <h2 class="fs-6"><a href="shop-single.html"
+                                    <h2 class="fs-6"><a href="{% url 'product_details' p.product_id %}"
                                             class="text-inherit text-decoration-none">{{p.title}}</a></h2>
                                     <div>
                                         <!-- rating -->

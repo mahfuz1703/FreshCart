@@ -55,3 +55,13 @@ def vendor_details(request, vendor_id):
         'products': products,
     }
     return render(request, "home/vendor_details.html", context)
+
+def product_details(request, product_id):
+    product = Product.objects.get(product_id=product_id)
+    product_images = product.p_images.all()
+
+    context = {
+        'product': product,
+        'p_images': product_images,
+    }
+    return render(request, "home/product_details.html", context)
