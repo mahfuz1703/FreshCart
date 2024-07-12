@@ -58,10 +58,12 @@ def vendor_details(request, vendor_id):
 
 def product_details(request, product_id):
     product = Product.objects.get(product_id=product_id)
+    products = Product.objects.filter(category=product.category).exclude(product_id=product_id)
     product_images = product.p_images.all()
 
     context = {
         'product': product,
+        'products': products,
         'p_images': product_images,
     }
     return render(request, "home/product_details.html", context)
