@@ -136,6 +136,18 @@
                                             </small>
                                         </td>
                                     </tr>
+                                    {% if product.tags.all %}
+                                    <tr>
+                                        <td>Tags:</td>
+                                        <td>
+                                            {% for tag in product.tags.all %}
+                                            <a href="{% url 'product_tag_wise' tag.slug %}" rel="tag" style="padding-right: 5px;">
+                                                #{{tag.slug}}
+                                            </a>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
                                 </tbody>
                             </table>
                         </div>

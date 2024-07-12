@@ -32,7 +32,11 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # third party app
     'jazzmin', # for custom admin panel
+    'taggit', # for product tags
+
+    # default app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

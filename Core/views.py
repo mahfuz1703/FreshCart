@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from .models import *
+from taggit.models import Tag
 
 # Create your views here.
 def home(request):
@@ -67,3 +68,16 @@ def product_details(request, product_id):
         'p_images': product_images,
     }
     return render(request, "home/product_details.html", context)
+
+def product_tag_wise(request, tag_slug=None):
+    products = Product.objects.filter(product_status="published")
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        products = products.filter(tags__in=[tag])
+
+    context= {
+        'products': products,
+        'tag': tag_slug,
+    }
+    return render(request, "home/product_tag_wise.html", context)
