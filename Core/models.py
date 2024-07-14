@@ -20,11 +20,11 @@ STATUS = (
 )
 
 RATING = (
-    ('1', '★☆☆☆☆'),
-    ('2', '★★☆☆☆'),
-    ('3', '★★★☆☆'),
-    ('4', '★★★★☆'),
-    ('5', '★★★★★'),
+    (1, '★☆☆☆☆'),
+    (2, '★★☆☆☆'),
+    (3, '★★★☆☆'),
+    (4, '★★★★☆'),
+    (5, '★★★★★'),
 )
 
 def user_directory_path(instance, filename):
@@ -160,7 +160,7 @@ class CartOrderItems(models.Model):
 
 class ProductReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="product")
     review = models.TextField()
     rating = models.IntegerField(choices=RATING, default=None)
     date = models.DateField(auto_now_add=True)
