@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from taggit.models import Tag
 from django.db.models import Count, Avg
+from .forms import ProductReviewForm
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -62,8 +64,21 @@ def product_details(request, product_id):
     product = Product.objects.get(product_id=product_id)
     products = Product.objects.filter(category=product.category).exclude(product_id=product_id)
     product_images = product.p_images.all()
-    reviews = ProductReview.objects.filter(product=product).order_by("-date")
     avarage_rating = ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
+
+    if request.method == 'POST':
+        form = ProductReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            messages.success(request, "Your review successfully added. Thank you!!")
+            return redirect('product_details', product_id=product_id)
+    else:
+        form = ProductReviewForm()
+
+    reviews = ProductReview.objects.filter(product=product).order_by("-date")
 
     context = {
         'product': product,
@@ -71,6 +86,7 @@ def product_details(request, product_id):
         'p_images': product_images,
         'reviews': reviews,
         'avarage_rating': avarage_rating,
+        'form': form,
     }
     return render(request, "home/product_details.html", context)
 
