@@ -102,3 +102,15 @@ def product_tag_wise(request, tag_slug=None):
         'tag': tag_slug,
     }
     return render(request, "home/product_tag_wise.html", context)
+
+def search_product(request):
+    query = request.GET.get("q")
+    if query:
+        products = Product.objects.filter(title__icontains=query).order_by("-date")
+        context = {
+            "products": products,
+            "query": query,
+        }
+        return render(request, "home/search_product.html", context)
+    else:
+        return redirect(home)

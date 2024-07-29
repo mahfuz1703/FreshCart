@@ -20,4 +20,8 @@ urlpatterns = [
 
     # tags
     path('products/tag/<slug:tag_slug>/', views.product_tag_wise, name='product_tag_wise'),
+
+    #search
+    path('search/', views.search_product, name="search")
+
 ]

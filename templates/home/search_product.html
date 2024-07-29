@@ -1,0 +1,144 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <!-- section -->
+    <section class="mt-8 mb-lg-14 mb-8">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- col -->
+                <div class="col-lg-12">
+                    <!-- page header -->
+                    <div class="card mb-4 bg-light border-0">
+                        <!-- card body -->
+                        <div class="card-body p-9">
+                            <!-- title -->
+                            <h2 class="mb-0 fs-1">{{query}}</h2>
+                        </div>
+                    </div>
+                    <!-- list icon -->
+                    <div class="d-lg-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="mb-3 mb-md-0">
+                                {% if products.count %}
+                                <span class="text-dark">{{products.count}}</span>
+                                Products found
+                                {% else %}
+                                Search item not found
+                                {% endif %}
+                            </p>
+                        </div>
+                        <!-- icon -->
+                        <div class="d-md-flex justify-content-between align-items-center">
+                            <div>
+                                <a href="shop-list.html" class="text-muted me-3"><i class="bi bi-list-ul"></i></a>
+                                <a href="shop-grid.html" class="me-3 active"><i class="bi bi-grid"></i></a>
+                                <a href="shop-grid-3-column.html" class="me-3 text-muted"><i
+                                        class="bi bi-grid-3x3-gap"></i></a>
+                            </div>
+                            <div class="d-flex mt-2 mt-lg-0">
+                                <div class="me-2 flex-grow-1">
+                                    <!-- select option -->
+                                    <select class="form-select">
+                                        <option selected>Show: 50</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <!-- select option -->
+                                    <select class="form-select">
+                                        <option selected>Sort by: Featured</option>
+                                        <option value="Low to High">Price: Low to High</option>
+                                        <option value="High to Low">Price: High to Low</option>
+                                        <option value="Release Date">Release Date</option>
+                                        <option value="Avg. Rating">Avg. Rating</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3 mt-2">
+                        <!-- col -->
+
+                        {% for p in products %}
+                        <div class="col">
+                            <!-- card product -->
+                            <div class="card card-product">
+                                <div class="card-body">
+                                    <!-- badge -->
+                                    <div class="text-center position-relative">
+                                        <div class="position-absolute top-0 start-0">
+                                            <span class="badge bg-danger">-{{p.get_percentage | floatformat:0}}%</span>
+                                        </div>
+                                        <a href="{% url 'product_details' p.product_id %}">
+                                            <!-- img -->
+                                            <img src="{{p.image.url}}"
+                                                alt="{{p.title}}" class="mb-3 img-fluid" />
+                                        </a>
+                                        <!-- action btn -->
+                                        <div class="card-product-action">
+                                            <a href="#!" class="btn-action" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal">
+                                                <i class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true"
+                                                    title="Quick View"></i>
+                                            </a>
+                                            <a href="shop-wishlist.html" class="btn-action" data-bs-toggle="tooltip"
+                                                data-bs-html="true" title="Wishlist"><i class="bi bi-heart"></i></a>
+                                            <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true"
+                                                title="Compare"><i class="bi bi-arrow-left-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- heading -->
+                                    <div class="text-small mb-1">
+                                        <a href="{% url 'product_category_wise' p.category.category_id %}" class="text-decoration-none text-muted"><small>{{p.category}}</small></a>
+                                    </div>
+                                    <h2 class="fs-6"><a href="{% url 'product_details' p.product_id %}"
+                                            class="text-inherit text-decoration-none">{{p.title}}</a></h2>
+                                    <div>
+                                        <!-- rating -->
+                                        <small class="text-warning">
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-half"></i>
+                                        </small>
+                                        <span class="text-muted small">4.5(149)</span>
+                                    </div>
+                                    <!-- price -->
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div>
+                                            <span class="text-dark">${{p.price}}</span>
+                                            <span class="text-decoration-line-through text-muted">${{p.old_price}}</span>
+                                        </div>
+                                        <!-- btn -->
+                                        <div>
+                                            <a href="#!" class="btn btn-primary btn-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-plus">
+                                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                </svg>
+                                                Add
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock content %}
